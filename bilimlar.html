@@ -1,0 +1,17 @@
+<!doctype html><html lang="uz"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' blob: https://yqkyhetexhadcrhozgqt.supabase.co wss://yqkyhetexhadcrhozgqt.supabase.co; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="no-referrer"><link rel="stylesheet" href="./assets/app.css">
+<script src="./vendor/supabase-2.81.1.js"></script>
+<title>FUNDAMED — Bilimlar bazasi</title></head><body>
+<header class="top"><div class="brand">FUNDAMED · Bilimlar bazasi<small>OXU · Fundamental tibbiyot kafedrasi</small></div><nav id="nav"></nav></header>
+<main><h1>Kafedra bilimlar bazasi</h1><p class="muted">Tahlil qilingan hujjatlardan olingan ma’lumotlar · har bir javob manbasi bilan</p>
+<p id="status" class="status" role="status">Tizimga ulanmoqda...</p>
+<section id="app" hidden>
+<div class="card"><h2>Qidirish</h2><form id="searchForm" class="row"><input id="q" type="search" maxlength="200" placeholder="Masalan: Karimov lavozimi, anatomiya fani soatlari, 2-kurs guruhlari" aria-label="Qidiruv so‘zi" style="flex:1;min-width:220px"><button>Qidirish</button></form>
+<div id="results"></div></div>
+<div class="card"><h2>Shaxs yoki obyekt bo‘yicha ma’lumotlar</h2><form id="entityForm" class="row"><input id="entity" list="entityList" maxlength="120" placeholder="F.I.Sh. yoki fan nomi" aria-label="Shaxs yoki obyekt" style="flex:1;min-width:220px"><datalist id="entityList"></datalist><button>Ko‘rsatish</button></form><div id="entityOut"></div></div>
+<div class="two"><div class="card"><div class="row between"><h2>Qarama-qarshi ma’lumotlar</h2><button id="loadConflicts" class="secondary">Tekshirish</button></div><p class="muted">Turli hujjatlarda bir xil ma’lumot har xil yozilgan holatlar.</p><div id="conflicts"></div></div>
+<div class="card"><div class="row between"><h2>Yetishmayotgan ma’lumotlar</h2><button id="loadMissing" class="secondary">Ko‘rsatish</button></div><p class="muted">Jadvallarda bo‘sh qolgan kataklar.</p><div id="missing"></div></div></div>
+</section></main>
+<script type="module" src="./js/pages/bilimlar.js"></script></body></html>

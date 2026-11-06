@@ -1,0 +1,47 @@
+*{box-sizing:border-box}
+:root{--ink:#18364b;--muted:#5f7689;--brand:#08729a;--brand-d:#065a7a;--head:#143a5d;--bg:#f3f6fa;--card:#fff;--line:#dce5ed;--warn-bg:#fff3d5;--warn-line:#e9cf86;--bad:#b3352b;--bad-bg:#ffe2e0;--ok:#1d7a46;--ok-bg:#e1f5e8;--info-bg:#edf5fa}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+header.top{background:var(--head);color:#fff;padding:14px max(16px,calc((100vw - 1160px)/2));display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+header.top .brand{font-weight:800;font-size:19px}header.top .brand small{display:block;font-weight:400;font-size:12px;color:#c8dbea}
+header.top nav{display:flex;gap:4px 14px;flex-wrap:wrap;align-items:center}
+header.top nav a{color:#fff;text-decoration:none;padding:4px 0;border-bottom:2px solid transparent}
+header.top nav a[aria-current=page]{border-bottom-color:#9fd4ec;font-weight:700}
+main{max-width:1160px;margin:24px auto;padding:0 16px}
+h1{font-size:26px;margin:0 0 4px}h2{font-size:19px;margin:0 0 12px}h3{margin:0 0 6px;font-size:17px}
+a{color:var(--brand)}.muted,small{color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin:14px 0;min-width:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.two{display:grid;grid-template-columns:1.1fr 1fr;gap:14px}@media(max-width:800px){.two{grid-template-columns:1fr}}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.row.between{justify-content:space-between}
+label{display:block;font-weight:600;margin:12px 0 5px}
+input,select,textarea,button{font:inherit;padding:10px 12px;border-radius:8px;max-width:100%}
+input,select,textarea{width:100%;border:1px solid #b9c8d4;background:#fff;color:inherit}
+.row select,.row input[type=search]{width:auto;flex:1;min-width:160px}
+button{border:0;background:var(--brand);color:#fff;cursor:pointer}button:hover{background:var(--brand-d)}
+button.secondary{background:#e8eff5;color:#17405a}button.secondary:hover{background:#d8e5ee}
+button.danger{background:var(--bad-bg);color:var(--bad)}
+button:disabled{opacity:.5;cursor:not-allowed}
+.notice{background:var(--warn-bg);border:1px solid var(--warn-line);padding:12px 14px;border-radius:10px}
+.info{background:var(--info-bg);border-radius:10px;padding:12px 14px}
+.status{min-height:24px}
+.metric{font-size:30px;font-weight:750;color:var(--brand)}
+.item{padding:14px 0;border-bottom:1px solid #e6edf3}.item:last-child{border:0}
+.task{padding:16px;border:1px solid #d9e4ed;border-radius:12px;margin:12px 0}
+.meta{font-size:13px;color:#536e80}
+.tag{display:inline-block;border-radius:7px;padding:2px 8px;background:#edf3f7;font-size:12px;margin-right:4px}
+.tag.bad{background:var(--bad-bg);color:var(--bad)}.tag.ok{background:var(--ok-bg);color:var(--ok)}.tag.warn{background:var(--warn-bg);color:#7a5a00}
+.bar{height:13px;background:#e4edf4;border-radius:10px;overflow:hidden;margin-top:12px}.fill{height:100%;background:var(--brand)}
+table{width:100%;border-collapse:collapse}td,th{text-align:left;padding:9px;border-bottom:1px solid #e5edf2;vertical-align:top}th{font-size:13px;color:#526b7d}
+.scroll{overflow:auto}.pre{white-space:pre-line}
+.message{padding:13px 15px;margin:12px 0;border-radius:12px;white-space:pre-line;line-height:1.6;overflow-wrap:anywhere}
+.message.user{background:#e5f3fc;margin-left:10%}.message.agent{background:#f0f4f7;margin-right:6%}
+.message .sources{margin-top:8px;font-size:13px;color:#4c6578}.message .missing{margin-top:8px;padding:8px 10px;background:var(--warn-bg);border-radius:8px;font-size:14px}
+#chat{max-height:62vh;overflow:auto}
+mark{background:#fff0a8}
+.btn-link{display:inline-block;background:var(--brand);color:#fff;padding:11px 16px;border-radius:9px;text-decoration:none;font-weight:700}
+footer{margin:30px 0;color:#718093;font-size:13px}
+@media(max-width:600px){h1{font-size:22px}.message.user,.message.agent{margin-left:0;margin-right:0}}
+@media print{header.top,.no-print{display:none!important}body{background:#fff}.card{break-inside:avoid;border-color:#ccc}#chat{max-height:none}}
+input[type=file]{max-width:100%;min-width:0;width:100%}
+.row>label{min-width:0;flex-wrap:wrap}
+#metrics{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
