@@ -2,7 +2,21 @@
 import {createClient} from 'https://esm.sh/@supabase/supabase-js@2.81.1';
 const db=createClient('https://yqkyhetexhadcrhozgqt.supabase.co','sb_publishable_IvJCp15fLQQ6krRm_rzXLg_XYhLc0_P',{auth:{detectSessionInUrl:true,persistSession:true}});
 const msg=document.getElementById('message'),form=document.getElementById('form');let ready=false;
-async function init(){const url=new URL(location.href),token=url.searchParams.get('token_hash'),type=url.searchParams.get('type');if(token&&['invite','recovery'].includes(type)){const {error}=await db.auth.verifyOtp({token_hash:token,type});if(error){msg.textContent='Taklif havolasi yaroqsiz yoki muddati tugagan.';return}}
-const {data:{user},error}=await db.auth.getUser();if(error||!user){msg.textContent='Taklif havolasi orqali kiring. Havola ishlamasa, administratordan yangi taklif so‘rang.';return}ready=true;form.hidden=false;msg.textContent='Yangi, boshqa joyda ishlatilmagan parol kiriting.';history.replaceState({},'',location.pathname)}
+async function init(){
+ const url=new URL(location.href),hash=new URLSearchParams(location.hash.slice(1));
+ const errorText=hash.get('error_description')||url.searchParams.get('error_description');
+ if(errorText){msg.textContent='Taklif havolasi ishlamadi: '+errorText+'. Yangi taklif yoki parol tiklash havolasi kerak.';return}
+ const token=url.searchParams.get('token_hash'),type=url.searchParams.get('type');
+ if(token&&['invite','recovery'].includes(type)){
+  const result=await db.auth.verifyOtp({token_hash:token,type});
+  if(result.error){msg.textContent='Taklif havolasi yaroqsiz yoki muddati tugagan: '+result.error.message;return}
+ }else if(hash.get('access_token')&&hash.get('refresh_token')){
+  const result=await db.auth.setSession({access_token:hash.get('access_token'),refresh_token:hash.get('refresh_token')});
+  if(result.error){msg.textContent='Taklifni tasdiqlashda xatolik: '+result.error.message;return}
+ }
+ const {data:{user},error}=await db.auth.getUser();
+ if(error||!user){msg.textContent='Taklif tasdiqlanmadi. Emaildagi yangi taklif yoki parolni tiklash havolasini oching. Eski localhost havolasi qayta ishlamasligi mumkin.';return}
+ ready=true;form.hidden=false;msg.textContent='Yangi, boshqa joyda ishlatilmagan parol kiriting.';history.replaceState({},'',location.pathname)
+}
 form.onsubmit=async e=>{e.preventDefault();if(!ready)return;const a=document.getElementById('password').value,b=document.getElementById('confirm').value;if(a!==b){msg.textContent='Parollar bir xil emas.';return}const btn=document.getElementById('save');btn.disabled=true;const {error}=await db.auth.updateUser({password:a});document.getElementById('password').value='';document.getElementById('confirm').value='';if(error){msg.textContent='Parolni saqlashda xatolik: '+error.message;btn.disabled=false;return}msg.textContent='Parol muvaffaqiyatli o‘rnatildi. Endi tizimga kirishingiz mumkin.';form.hidden=true;await db.auth.signOut();btn.disabled=false};init().catch(()=>msg.textContent='Havolani tekshirishda xatolik yuz berdi.');
 </script></body></html>
